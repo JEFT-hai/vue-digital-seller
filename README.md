@@ -4,18 +4,8 @@
 
 ## Build Setup
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+##### 安装vue-cli
+ 1. npm install vue-cli -g
+ 2. vue init webpack my-project
+ 3. npm install 生成package.json
+ 4. npm run dev 或 npm run build 上线
