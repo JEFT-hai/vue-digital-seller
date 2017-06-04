@@ -14,14 +14,23 @@
 * import VueRouter from 'vue-router'
 * Vue.use(VueRouter)
 * let router = new VueRouter({
-	mode: 'history',<br>
+	mode: 'history',(访问地址就没有哈希了'#'）<br>
 	routes: [<br>
 	  　{path:'/',component: IndexPage},<br>
-	  　{path:'/orderList',component: orderListPage},<br>
+	  　{path:'/orderList/:color',component: orderListPage},<br>
+     * (加参数形式）<br>
+     * （this.$route.params获取参数)<br>
+     * （加参数必须有参数，不然匹配不到路由）<br>
 	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis',<br>
 	   　 children: [<br>
 	      　{path:'forecast',component: ForPage}<br>
 	    　]<br>
 	  　}<br>
 	]<br>
+})<br>
+*　new Vue({
+  　el: '#app',<br>
+  　router,<br>
+  　template: '<layout/>',<br>
+  　components: { layout }<br>
 　})<br>
