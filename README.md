@@ -36,3 +36,42 @@
 　})
 * < router-view :seller="seller">< /router-view> < keep-alive>< /keep-alive>可以缓存资源
 * < router-link to="/seller">商家< /router-link>(:to="'seller'")(:to="{name:'seller'}")
+
+##### vue-resource
+* import VueResource from 'vue-resource'
+* Vue.use(VueResource)
+* created() { //直接在页面里使用<br>
+    　this.$http.get('api/getNewsList')<br>
+    　.then((res) => {<br>
+     　 　this.newsList = res.data<br>
+    　}, (err) => {<br>
+      　　console.log(err)<br>
+    　})<br>
+  }
+##### express.Router
+var apiServer = express()<br>
+var bodyParser = require('body-parser')<br>
+apiServer.use(bodyParser.urlencoded({extended: true}))<br>
+apiServer.use(bodyParser.json())<br>
+var apiRouter = express.Router()<br>
+var fs = require('fs')<br>
+apiRouter.get('/',function(req,res) {<br>
+  res.json({message:'hooray!'})<br>
+});<br>
+apiRouter.route('/:apiName')<br>
+.all(function (req, res){<br>
+  　fs.readFile('./db.json','utf8', function(err, data) {<br>
+    　　if (err) throw err<br>
+    　　var data = JSON.parse(data)<br>
+    　　if (data[req.params.apiName]) {<br>
+      　　　res.json(data[req.params.apiName])<br>
+    　　}<br>
+    　　else {<br>
+      　　　res.send('no such api name')<br>
+    　　}<br>
+  　})<br>
+})<br>
+apiServer.use('/api', apiRouter)<br>
+apiServer.listen(port + 1, function() {<br>
+  　console.log('JSON Server is running')<br>
+})<br>
