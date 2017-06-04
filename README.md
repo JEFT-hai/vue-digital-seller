@@ -11,20 +11,20 @@
  4. npm run dev 或 npm run build 上线
 
 ##### vue-router
- 1. import VueRouter from 'vue-router'
- 2. Vue.use(VueRouter)
- 3. let router = new VueRouter({
+* import VueRouter from 'vue-router'
+* Vue.use(VueRouter)
+* let router = new VueRouter({<br>
 	  mode: 'history',<br>
 	  routes: [<br>
-	    {path:'/',component: IndexPage},<br>
-	    {path:'/orderList',component: orderListPage},<br>
-	    {path:'/detail',component: DetailPage,redirect:'/detail/analysis',<br>
-	      children: [<br>
-	        {path:'forecast',component: ForPage},<br>
-	        {path:'analysis',component: AnaPage},<br>
-	        {path:'count',component: CouPage},<br>
-	        {path:'publish',component: PubPage}<br>
-	      ]<br>
-	      }<br>
-	    ]<br>
-    })<br>
+	  　{path:'/',component: IndexPage},<br>
+	  　{path:'/orderList',component: orderListPage},<br>
+	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis',<br>
+	    children: [<br>
+	    　  {path:'forecast',component: ForPage},<br>
+	     　 {path:'analysis',component: AnaPage},<br>
+	     　 {path:'count',component: CouPage},<br>
+	     　 {path:'publish',component: PubPage}<br>
+	    　]<br>
+	    　}<br>
+	 　 ]<br>
+  　　})<br>
