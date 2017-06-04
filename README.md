@@ -18,10 +18,10 @@
 	routes: [<br>
 	  　{path:'/',component: IndexPage},<br>
 	  　{path:'/orderList/:color',component: orderListPage},<br>
-     * (加参数形式）<br>
-     * （this.$route.params获取参数)<br>
-     * （加参数必须有参数，不然匹配不到路由）<br>
-	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis',<br>
+     　* 加参数形式<br>
+     　* this.$route.params获取参数，渲染$route.params.color<br>
+     　* 加参数必须有参数，不然匹配不到路由<br>
+	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis'(重定向),<br>
 	   　 children: [<br>
 	      　{path:'forecast',component: ForPage}<br>
 	    　]<br>
@@ -34,3 +34,5 @@
   　template: '<layout/>',<br>
   　components: { layout }<br>
 　})<br>
+* <router-view :seller="seller"></router-view> <keep-alive></keep-alive>可以缓存资源<br>
+* <router-link to="/seller">商家</router-link>(:to="'seller'")(:to="{name:'seller'}"
