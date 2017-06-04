@@ -14,17 +14,14 @@
 * import VueRouter from 'vue-router'
 * Vue.use(VueRouter)
 * let router = new VueRouter({
-	mode: 'history',
-	routes: [
-	  　{path:'/',component: IndexPage},
-	  　{path:'/orderList',component: orderListPage},
-	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis',
-	   　 children: [
-	      　{path:'forecast',component: ForPage},
-	      　{path:'analysis',component: AnaPage},
-	      　{path:'count',component: CouPage},
-	      　{path:'publish',component: PubPage}
-	    　]
-	  　}
-	]
-　})
+	mode: 'history',<br>
+	routes: [<br>
+	  　{path:'/',component: IndexPage},<br>
+	  　{path:'/orderList',component: orderListPage},<br>
+	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis',<br>
+	   　 children: [<br>
+	      　{path:'forecast',component: ForPage}<br>
+	    　]<br>
+	  　}<br>
+	]<br>
+　})<br>
