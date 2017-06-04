@@ -35,7 +35,7 @@
   　components: { layout }<br>
 　})
 * < router-view :seller="seller">< /router-view> < keep-alive>< /keep-alive>可以缓存资源
-* < router-link to="/seller">商家< /router-link>(:to="'seller'")(:to="{name:'seller'}")
+* < router-link to="/seller">商家< /router-link>(:to="'seller'")(:to="{name:'seller'}") tag="li"可以改变标签 active-class="active"
 
 ##### vue-resource
 * import VueResource from 'vue-resource'
@@ -75,3 +75,43 @@ apiServer.use('/api', apiRouter)<br>
 apiServer.listen(port + 1, function() {<br>
   　console.log('JSON Server is running')<br>
 })<br>
+
+##### awesome-vue 查找vue插件
+
+##### slide插件
+1. 图片通过js(data)引入模板，需要用require,eg:src: require('../assets/slideShow/pic1.jpg')
+2. @mouseover="clearInv" @mouseout="runInv"鼠标移入移出事件
+3. < transition name="slide-trans">
+   　< img v-if="isShow" :src="slides[nowIndex].src"><br>
+   < /transition><br>
+   < transition name="slide-trans-old"><br>
+   　< img v-if="!isShow" :src="slides[nowIndex].src"><br>
+   < /transition><br>
+   css:<br>
+   .slide-trans-enter-active {<br>
+    　transition: all .5s;<br>
+  }<br>
+  .slide-trans-enter {<br>
+    　transform: translateX(810px);<br>
+  }<br>
+  .slide-trans-old-leave-active {<br>
+    　transition: all .5s;<br>
+    　transform: translateX(-810px);<br>
+  }
+  注意　两个img，一个会把前一个挤下来，所以要设置top: 0；
+  
+##### dialog
+1. < slot>< /slot>在组件中插入插件
+2. @on-close="close('showRegDialog')"，
+   dialog中通过 close() { this.$emit('on-close')} 将事件传递给父组件<br>
+   
+##### 路由映射
+1. 通过this.$route.path拿到当前页面路由地址 
+ * productIcon () { return this.imgMap[this.$route.path];}
+ * imgMap: {
+          　'/detail/count': require("../assets/images/1.png"),<br>
+          　'/detail/forecast': require("../assets/images/2.png"),<br>
+          　'/detail/analysis': require("../assets/images/3.png"),<br>
+          　'/detail/publish': require("../assets/images/4.png")<br>
+        　　}
+ * :src="productIcon"
