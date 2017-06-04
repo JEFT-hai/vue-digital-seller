@@ -27,12 +27,12 @@
 	    　]<br>
 	  　}<br>
 	]<br>
-})<br>
-*　new Vue({<br>
+})
+* new Vue({<br>
   　el: '#app',<br>
   　router,<br>
   　template: '<layout/>',<br>
   　components: { layout }<br>
-　})<br>
+　})
 * <router-view :seller="seller"></router-view> <keep-alive></keep-alive>可以缓存资源
-* <router-link to="/seller">商家</router-link>(:to="'seller'")(:to="{name:'seller'}"
+* <router-link to="/seller">商家</router-link>(:to="'seller'")(:to="{name:'seller'}")
