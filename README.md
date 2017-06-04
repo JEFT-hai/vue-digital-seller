@@ -34,5 +34,5 @@
   　template: '<layout/>',<br>
   　components: { layout }<br>
 　})
-* <router-view :seller="seller"></router-view> <keep-alive></keep-alive>可以缓存资源
+* (< router-view :seller="seller"></router-view> <keep-alive></keep-alive>)可以缓存资源
 * <router-link to="/seller">商家</router-link>(:to="'seller'")(:to="{name:'seller'}")
