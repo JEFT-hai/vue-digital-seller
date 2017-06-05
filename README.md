@@ -2,8 +2,6 @@
 
 > A Vue.js project
 
-## Build Setup
-
 ##### 安装vue-cli
  1. npm install vue-cli -g
  2. vue init webpack my-project
@@ -23,7 +21,7 @@
      　* 加参数必须有参数，不然匹配不到路由<br>
 	  　{path:'/detail',component: DetailPage,redirect:'/detail/analysis'(重定向),<br>
 	   　 children: [<br>
-	      　{path:'forecast',component: ForPage}<br>
+	      　{path:'forecast',component: ForPage} 子路由没有'/'<br>
 	    　]<br>
 	  　}<br>
 	]<br>
@@ -108,10 +106,77 @@ apiServer.listen(port + 1, function() {<br>
 ##### 路由映射
 1. 通过this.$route.path拿到当前页面路由地址 
  * productIcon () { return this.imgMap[this.$route.path];}
- * imgMap: {
+ * imgMap: { <br>
           　'/detail/count': require("../assets/images/1.png"),<br>
           　'/detail/forecast': require("../assets/images/2.png"),<br>
           　'/detail/analysis': require("../assets/images/3.png"),<br>
           　'/detail/publish': require("../assets/images/4.png")<br>
         　　}
  * :src="productIcon"
+##### 基础组件
+ base: select,counter,mutiplyCounter,chooser,dialog
+##### 总价计算
+1. @on-change="onParamChange('buyNum', $event)" 各个base组件绑定on-change事件 $event 是必须的 子组件（base）通过this.$emit('on-change',val)将值传递给on-change事件
+2. onParamChange (attr, val) { this[attr] = val;  this.getPrice() }
+3. getPrice () {
+      let buyVersionsArray = _.map(this.versions, (item) => {<br>
+        return item.value<br>
+      }) _引用自lodash方法<br>
+      let reqParams = {<br>
+        buyNumber: this.buyNum,<br>
+        buyType: this.buyType.value,<br>
+        period: this.period.value,<br>
+        version: buyVersionsArray.join(',') join将Object(array)转化成字符串 (ajs)a.j=>s<br>
+      }<br>
+      this.$http.post('/api/getPrice', reqParams)<br>
+      .then((res) => {<br>
+        this.price = res.data.amount<br>
+        (返回的res.data格式为Object，如果为字符串还要JSON.parse(res.data)<br>
+        })<br>
+    }<br>
+ 4. mounted () { // 初始化，页面载入的状态<br>
+    　this.buyNum = 1<br>
+    　this.buyType = this.buyTypes[0]<br>
+    　this.versions = [this.versionList[0]]<br>
+    　this.period = this.periodList[0]<br>
+    　this.getPrice()<br>
+  　}<br>
+ *  支付
+ confirmBuy () {<br>
+      let buyVersionsArray = _.map(this.versions, (item) => {<br>
+        　return item.value<br>
+      })<br>
+      let reqParams = {<br>
+        　buyNumber: this.buyNum,<br>
+        　buyType: this.buyType.value,<br>
+        　period: this.period.value,<br>
+       　 version: buyVersionsArray.join(','),<br>
+        　bankId: this.bankId<br>
+      }<br>
+      this.$http.post('/api/createOrder', reqParams)<br>
+      .then((res) => {<br>
+        　this.orderId = res.data.orderId<br>
+       　 this.isShowCheckOrder = true<br>
+       　 this.isShowPayDialog = false<br>
+      }, (err) => {<br>
+       　 this.isShowBuyDialog = false<br>
+       　 this.isShowErrDialog = true<br>
+      })<br>
+    }<br>
+##### 定义全局事件
+1. import Vue from 'vue'
+
+　const eventBus = new Vue()<br>
+
+　export { eventBus }<br>
+2. resetComponent() {eventBus.$emit('reset-component')}
+3. mounted () {
+      　eventBus.$on('reset-component', () => {<br>
+        　this.isDrop = false<br>
+      　})<br>
+    }<br>
+4. toggleDrop(e) { 多个select组件情况
+        　e.stopPropagation()<br>
+        　eventBus.$emit('reset-component') <br>
+       　 this.isDrop = !this.isDrop<br>
+      }<br>
