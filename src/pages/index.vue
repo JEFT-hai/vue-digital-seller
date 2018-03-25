@@ -59,22 +59,22 @@ export default {
         {
           src: require('../assets/slideShow/pic1.jpg'),
           title: 'xxx1',
-          href: 'detail/analysis'
+          href: '#/detail/analysis'
         },
         {
           src: require('../assets/slideShow/pic2.jpg'),
           title: 'xxx2',
-          href: 'detail/count'
+          href: '#/detail/count'
         },
         {
           src: require('../assets/slideShow/pic3.jpg'),
           title: 'xxx3',
-          href: 'detail/publish'
+          href: '#/detail/publish'
         },
         {
           src: require('../assets/slideShow/pic4.jpg'),
           title: 'xxx4',
-          href: 'detail/forecast'
+          href: '#/detail/forecast'
         }
       ],
       newsList: [],
@@ -114,20 +114,20 @@ export default {
           list: [
             {
               name: '数据统计',
-              url: '/detail/count'
+              url: '#/detail/count'
             },
             {
               name: '数据预测',
-              url: '/detail/forecast'
+              url: '#/detail/forecast'
             },
             {
               name: '流量分析',
-              url: '/detail/analysis',
+              url: '#/detail/analysis',
               hot: true
             },
             {
               name: '广告发布',
-              url: '/detail/publish'
+              url: '#/detail/publish'
             }
           ]
         },
@@ -245,16 +245,16 @@ export default {
     padding: 0 0 10px 120px;
   }
   .index-board-car .index-board-item-inner{
-    background: url(../assets/images/1.png) no-repeat
+    background: url(./1.png) no-repeat
   }
   .index-board-earth .index-board-item-inner{
-    background: url(../assets/images/2.png) no-repeat
+    background: url(./2.png) no-repeat
   }
   .index-board-loud .index-board-item-inner{
-    background: url(../assets/images/3.png) no-repeat
+    background: url(./3.png) no-repeat
   }
   .index-board-hill .index-board-item-inner{
-    background: url(../assets/images/4.png) no-repeat
+    background: url(./4.png) no-repeat
   }
   .index-board-item-inner h2 {
     font-size: 15px;
