@@ -11,11 +11,13 @@ import ForPage from './pages/detail/forecast'
 import AnaPage from './pages/detail/analysis'
 import CouPage from './pages/detail/count'
 import PubPage from './pages/detail/publish'
+import Vuex from 'vuex'
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(Vuex)
 
 let router = new VueRouter({
-	mode: 'history',
+	// mode: 'history',
 	routes: [
 	  {path:'/',component: IndexPage},
 	  {path:'/orderList',component: orderListPage},
@@ -30,12 +32,41 @@ let router = new VueRouter({
 	]
 })
 
+const store = new  Vuex.Store({
+	state:{
+       params:{},
+       orderList:[]
+	},
+	getters:{
+
+	},
+	mutations:{
+       updateParams (state, {key,val}){
+          state.params[key] = val;
+       },
+       updateOrderList(state,payload){
+       	  state.orderList = payload;
+       }
+	},
+	actions:{
+		getOrderList(state){
+			Vue.http.post('./api/getOrderList', state.params)
+            .then((res) => {
+              this.commit('updateOrderList',res.data.list)
+            },(err) => {
+     
+            })
+		}
+	}
+})
+
+
 //Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  template: '<layout/>',
-  components: { layout }
+  store,
+  render: h => h(layout)
 })

@@ -1,7 +1,7 @@
 <template>
-  <div class="dialog-wrap" v-if="isShow">
+  <div class="dialog-wrap">
     <div  @click="close" class="dialog-cover" v-if="isShow"></div>
-    <transition name = "drop">
+    <transition name="drop">
       <div class="dialog-content" v-if="isShow">
         <p @click="close" class="dialog-close">X</p>
         <slot>empty</slot>
@@ -25,16 +25,18 @@
 </script>
 
 <style>
-  .drop-enter {
-    transform: translateY(-500px);
-  }
   .drop-enter-active {
-    transition: all .5s ease;
-  }
-  .drop-leave-active {
-    transition: all .3s ease;
-    transform: translateY(-500px);
-  }
+  transition: all .5s ease;
+}
+.drop-leave-active {
+  transition: all .3s ease;
+}
+.drop-enter {
+  transform: translateY(-500px);
+}
+.drop-leave-active {
+  transform: translateY(-500px);
+}
   .dialog-wrap {
     position: fixed;
     width: 100%;

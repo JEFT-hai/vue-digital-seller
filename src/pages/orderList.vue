@@ -34,6 +34,7 @@
 <script >
   import VSelection from '../components/selection'
   import VDatePicker from '../components/datepicker'
+  import { mapState} from 'vuex'
   export default {
     components: {
       VSelection,
@@ -43,8 +44,6 @@
       return {
         query: '',
         productId: 0,
-        startDate: '',
-        endDate: '',
         products: [
           {
             label: '数据统计',
@@ -93,43 +92,38 @@
           key: 'amount'
         }
       ],
-      currentOrder: 'asc',
-      tableData: []
+      currentOrder: 'asc'
+      // tableData: []
       }
     },
     methods: {
       
       productChange (obj) {
-        this.productId = obj.value
-        this.getTableData();
+        this.$store.commit('updateParams',{
+          key:'productId',
+          val:obj.value
+        })
+        this.$store.dispatch('getOrderList')
       },
       changeStartDate(date) {
-        this.startDate = date
-        this.getTableData();
+        this.$store.commit('updateParams',{
+          key:'startDate',
+          val:date
+        })
+        this.$store.dispatch('getOrderList')
       },
       changeEndDate(date) {
-        this.endDate = date
-        this.getTableData();
-      },
-      getTableData () {
-        let reqParam = {
-          query: this.query,
-          productId: this.productId,
-          startDate: this.startDate,
-          endDate: this.endDate
-        }
-        this.$http.post('./api/getOrderList', reqParam)
-        .then((res) => {
-          this.tableData = res.data.list
-        },(err) => {
-
+        this.$store.commit('updateParams',{
+          key:'endDate',
+          val:date
         })
+        this.$store.dispatch('getOrderList')
       },
       changeOrderType (headItem) {
         this.tableHeads.map((item) => {
           item.active = false
           return item
-      })
+        })
         headItem.active = true
         if (this.currentOrder === 'asc') {
           this.currentOrder = 'desc'
@@ -140,8 +134,14 @@
           this.tableData = _.orderBy(this.tableData, headItem.key,   this.currentOrder)
       }
     },
+    computed:mapState({
+      params:state=>state.params,
+      tableData:state=>state.orderList
+    }),
     mounted() {
-      this.getTableData();
+      // this.getTableData();
+      this.$store.dispatch('getOrderList')
+      console.log(this.tableData)
     },
     watch: {
       query() {

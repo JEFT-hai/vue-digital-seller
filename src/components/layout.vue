@@ -71,14 +71,11 @@ export default {
       this[attr] = false
     },
     onSuccessLog(data) {
-      console.log(data)
       this.close('showLogDialog'),
       this.username = data.username
     },
     onSuccessName(data) {
-      console.log(data)
       this.userData.push(data)
-      console.log(this.userData);
     },
     resetComponent() {
       eventBus.$emit('reset-component')
