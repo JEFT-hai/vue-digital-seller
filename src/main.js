@@ -12,6 +12,9 @@ import AnaPage from './pages/detail/analysis'
 import CouPage from './pages/detail/count'
 import PubPage from './pages/detail/publish'
 import Vuex from 'vuex'
+
+import './pages/index.css';
+
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(Vuex)
